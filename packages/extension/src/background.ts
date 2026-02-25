@@ -6,6 +6,10 @@ declare const chrome: any;
 
 const API_KEY_STORAGE_KEY = 'oz.apiKey';
 const CUSTOMIZATIONS_STORAGE_KEY = 'oz.customizations';
+const COORDINATION_REPO_POLICY = {
+  allowedOwner: 'warpdotdev',
+  allowedRepo: 'oz-chrome-extension',
+} as const;
 
 type CreateScriptMessage = {
   type: 'CREATE_SCRIPT';
@@ -78,7 +82,7 @@ async function createScript(message: CreateScriptMessage): Promise<{ runId: stri
     throw new Error(`Run ${completedRun.run_id} finished with state ${completedRun.state}`);
   }
   const resolution = client.resolvePullRequest(completedRun);
-  const imported = await client.importScriptFromPullRequest(resolution.prUrl);
+  const imported = await client.importScriptFromPullRequest(resolution.prUrl, COORDINATION_REPO_POLICY);
   validateManifest(imported.manifest);
   const customization = await toStoredCustomization(imported, new Date().toISOString());
   const customizationMap = await getCustomizationMap();

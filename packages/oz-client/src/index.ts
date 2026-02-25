@@ -29,6 +29,11 @@ interface GitHubPullRequestFile {
   filename: string;
   raw_url: string;
 }
+export interface PullRequestImportPolicy {
+  allowedOwner: string;
+  allowedRepo: string;
+  allowedPathPrefix?: string;
+}
 
 export interface ImportedPullRequestScript {
   manifest: ScriptManifest;
@@ -118,8 +123,16 @@ export class OzApiClient {
     };
   }
 
-  async importScriptFromPullRequest(prUrl: string): Promise<ImportedPullRequestScript> {
+  async importScriptFromPullRequest(
+    prUrl: string,
+    policy: PullRequestImportPolicy,
+  ): Promise<ImportedPullRequestScript> {
     const prRef = this.parsePullRequestUrl(prUrl);
+    if (prRef.owner !== policy.allowedOwner || prRef.repo !== policy.allowedRepo) {
+      throw new Error(
+        `Pull request ${prUrl} is outside allowed repository ${policy.allowedOwner}/${policy.allowedRepo}`,
+      );
+    }
     const pullRequest = await this.fetchJson<GitHubPullRequestResponse>(
       `${GITHUB_API_BASE_URL}/repos/${prRef.owner}/${prRef.repo}/pulls/${prRef.number}`,
     );
@@ -128,9 +141,11 @@ export class OzApiClient {
     if (!manifestFile) {
       throw new Error(`Pull request ${prUrl} does not contain manifest.json`);
     }
+    assertPathAllowed(manifestFile.filename, policy.allowedPathPrefix, 'manifest');
     const manifestText = await this.fetchText(manifestFile.raw_url);
     const manifest = JSON.parse(manifestText) as ScriptManifest;
     const scriptPath = resolveScriptPathFromManifest(manifestFile.filename, manifest.entrypoint);
+    assertPathAllowed(scriptPath, policy.allowedPathPrefix, 'script');
     const scriptFile = files.find((file) => file.filename === scriptPath);
     if (!scriptFile) {
       throw new Error(`Unable to locate script entrypoint "${scriptPath}" in pull request ${prUrl}`);
@@ -225,4 +240,17 @@ function normalizePosix(path: string): string {
     out.push(part);
   }
   return out.join('/');
+}
+
+function assertPathAllowed(path: string, allowedPrefix: string | undefined, label: string): void {
+  if (!path) {
+    throw new Error(`Resolved ${label} path is empty`);
+  }
+  if (!allowedPrefix) {
+    return;
+  }
+  const normalizedPrefix = allowedPrefix.endsWith('/') ? allowedPrefix : `${allowedPrefix}/`;
+  if (!path.startsWith(normalizedPrefix)) {
+    throw new Error(`${label} path "${path}" is outside allowed prefix "${normalizedPrefix}"`);
+  }
 }
