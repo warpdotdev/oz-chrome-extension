@@ -8,7 +8,7 @@
 - User prompts customization while on a site.
 - Extension sends prompt + page context to Oz production API.
 - Extension polls run status and reads PR URL from structured `PULL_REQUEST` artifacts in `RunItem.artifacts`.
-- Extension fetches generated script from PR head files, validates, stores as a draft, then registers via `chrome.userScripts` after explicit user enable.
+- Extension fetches generated script from PR head files, validates it, stores it, and auto-registers it via `chrome.userScripts` after successful import.
 
 ## Monorepo packages
 
@@ -22,6 +22,29 @@
 - Use production Oz endpoints: `https://app.warp.dev/api/v1`.
 - Use `oz` CLI for command-line Oz workflows.
 - Do not parse run summary text for PR URLs; read `RunItem.artifacts` only.
+
+## Build and load in Chrome
+
+1. Install dependencies:
+   - `npm install`
+2. Build extension artifacts (this bundles workspace imports for Chrome runtime):
+   - `npm run build`
+3. Open `chrome://extensions`, enable **Developer mode**, click **Load unpacked**.
+4. Select `packages/extension`.
+5. If already loaded, click **Reload** after each `npm run build`.
+
+If you skip `npm run build`, Chrome may show `Failed to resolve module specifier "@oz-chrome-extension/..."` while registering the service worker.
+
+## Popup workflow
+
+1. Click the extension toolbar icon.
+2. If prompted, paste an Oz API key (`wk-...`) and save.
+3. Enter an optional environment ID and a customization prompt.
+4. Click **Run Oz agent** and watch live status updates:
+   - run phase/state
+   - status message
+   - session link (when available)
+5. On completion, the popup shows PR link and script id; the script is imported and enabled automatically.
 
 ## Future
 

@@ -12,10 +12,11 @@
     "<all_urls>"
   ],
   "background": {
-    "service_worker": "dist/background.js",
+    "service_worker": "dist/background.bundle.js",
     "type": "module"
   },
   "action": {
-    "default_title": "Oz"
+    "default_title": "Oz",
+    "default_popup": "popup.html"
   }
 }

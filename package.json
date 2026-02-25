@@ -8,9 +8,11 @@
   ],
   "scripts": {
     "typecheck": "tsc -b packages/shared packages/oz-client packages/oz-runtime packages/extension",
-    "build": "npm run typecheck"
+    "build:extension": "rm -f packages/extension/dist/*.js packages/extension/dist/*.js.map && esbuild packages/extension/src/background.ts packages/extension/src/content.ts packages/extension/src/options.ts packages/extension/src/popup.ts --bundle --format=esm --platform=browser --target=chrome120 --sourcemap --entry-names=[name].bundle --outdir=packages/extension/dist",
+    "build": "npm run typecheck && npm run build:extension"
   },
   "devDependencies": {
+    "esbuild": "^0.25.1",
     "typescript": "^5.8.2"
   }
 }

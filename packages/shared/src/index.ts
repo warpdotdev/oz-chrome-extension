@@ -21,6 +21,7 @@ export interface RunItem {
   run_id: string;
   state: 'QUEUED' | 'PENDING' | 'CLAIMED' | 'INPROGRESS' | 'SUCCEEDED' | 'FAILED' | 'CANCELLED';
   artifacts?: ArtifactItem[];
+  session_link?: string;
   status_message?: {
     message?: string;
   };

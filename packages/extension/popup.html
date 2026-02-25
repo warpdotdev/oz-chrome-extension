@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oz</title>
+    <style>
+      :root {
+        color-scheme: light dark;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif;
+      }
+      body {
+        margin: 0;
+        padding: 12px;
+        width: 360px;
+        background: #101116;
+        color: #e8eaed;
+      }
+      h1 {
+        font-size: 15px;
+        margin: 0 0 8px;
+      }
+      h2 {
+        font-size: 13px;
+        margin: 0 0 6px;
+      }
+      .card {
+        border: 1px solid #2b2f3a;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 10px;
+        background: #161924;
+      }
+      label {
+        display: block;
+        font-size: 12px;
+        margin: 0 0 4px;
+      }
+      input,
+      textarea,
+      button {
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 6px;
+        border: 1px solid #3a3f4d;
+        background: #0f121a;
+        color: inherit;
+        font: inherit;
+      }
+      input,
+      textarea {
+        padding: 8px;
+      }
+      textarea {
+        min-height: 90px;
+        resize: vertical;
+      }
+      button {
+        cursor: pointer;
+        padding: 8px 10px;
+        margin-top: 8px;
+        border-color: #5e8cff;
+        background: #2b5fe6;
+        color: #fff;
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+      .muted {
+        color: #a8b0c0;
+        font-size: 12px;
+      }
+      .hidden {
+        display: none;
+      }
+      .status-row {
+        font-size: 12px;
+        margin-top: 4px;
+      }
+      a {
+        color: #8bb0ff;
+      }
+      .error {
+        color: #ff9c9c;
+      }
+      .success {
+        color: #9effc5;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Oz Extension</h1>
+    <section id="setup-card" class="card hidden">
+      <h2>Setup</h2>
+      <p class="muted">Enter your Oz API key to enable script generation.</p>
+      <label for="api-key-input">Oz API key</label>
+      <input id="api-key-input" type="password" placeholder="wk-..." autocomplete="off" />
+      <button id="save-api-key-btn">Save API key</button>
+      <div id="setup-error" class="status-row error hidden"></div>
+      <div id="setup-success" class="status-row success hidden"></div>
+    </section>
+    <section id="run-card" class="card hidden">
+      <h2>Create script</h2>
+      <label for="environment-id-input">Environment ID (optional)</label>
+      <input id="environment-id-input" type="text" placeholder="UA..." autocomplete="off" />
+      <label for="prompt-input">Prompt</label>
+      <textarea id="prompt-input" placeholder="Describe the customization you want on this site..."></textarea>
+      <button id="run-btn">Run Oz agent</button>
+      <div id="run-error" class="status-row error hidden"></div>
+    </section>
+    <section id="status-card" class="card hidden">
+      <h2>Run status</h2>
+      <div class="status-row"><strong>Phase:</strong> <span id="status-phase">IDLE</span></div>
+      <div class="status-row"><strong>State:</strong> <span id="status-state">-</span></div>
+      <div class="status-row"><strong>Message:</strong> <span id="status-message">-</span></div>
+      <div class="status-row hidden" id="status-session-row">
+        <strong>Session:</strong> <a id="status-session-link" target="_blank" rel="noreferrer">Open</a>
+      </div>
+      <div class="status-row hidden" id="status-pr-row">
+        <strong>PR:</strong> <a id="status-pr-link" target="_blank" rel="noreferrer">Open</a>
+      </div>
+      <div class="status-row hidden" id="status-script-row"><strong>Script ID:</strong> <span id="status-script-id"></span></div>
+      <div id="status-error" class="status-row error hidden"></div>
+    </section>
+    <script type="module" src="./dist/popup.bundle.js"></script>
+  </body>
+</html>
