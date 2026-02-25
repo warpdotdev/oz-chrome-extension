@@ -1,0 +1,7 @@
+{
+  "id": "oz-warp-dev-fuchsia-theme",
+  "version": "1.0.0",
+  "matches": ["https://oz.warp.dev/*"],
+  "entrypoint": "./script.user.js",
+  "description": "Applies a fuchsia colour theme to all pages on oz.warp.dev — overrides backgrounds, text, borders, buttons, inputs, and scrollbars with fuchsia-family colours."
+}
