@@ -1,0 +1,9 @@
+{
+  "id": "oz-warp-dev-dark-theme",
+  "version": "1.0.0",
+  "matches": [
+    "https://oz.warp.dev/*"
+  ],
+  "entrypoint": "script.user.js",
+  "description": "Applies a comprehensive dark theme to the Oz dashboard at oz.warp.dev, converting the default light UI to a dark color scheme."
+}
