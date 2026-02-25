@@ -33,6 +33,13 @@ export interface RunResolution {
   branch: string;
 }
 
+export interface PullRequestRef {
+  owner: string;
+  repo: string;
+  number: number;
+  url: string;
+}
+
 export interface ScriptManifest {
   id: string;
   version: string;
@@ -43,9 +50,11 @@ export interface ScriptManifest {
 
 export interface StoredCustomization {
   id: string;
-  siteKey: string;
+  matches: string[];
   scriptSource: string;
   scriptSourceHash: string;
+  sourcePrUrl: string;
+  sourceCommitSha: string;
   enabled: boolean;
   createdAt: string;
   updatedAt: string;

@@ -20,23 +20,30 @@ export function validateManifest(manifest: ScriptManifest): void {
   if (!manifest.entrypoint.trim()) {
     throw new Error('Manifest entrypoint is required');
   }
+  if (!manifest.description.trim()) {
+    throw new Error('Manifest description is required');
+  }
 }
 
-export function buildSiteKey(match: string): string {
-  return `site:${match}`;
+export async function sha256Hex(value: string): Promise<string> {
+  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('');
 }
 
-export function toStoredCustomization(
+export async function toStoredCustomization(
   draft: ImportedScriptDraft,
   nowIso: string,
-  scriptSourceHash: string,
-): StoredCustomization {
-  const firstMatch = draft.manifest.matches[0] ?? '*://*/*';
+): Promise<StoredCustomization> {
+  const scriptSourceHash = await sha256Hex(draft.scriptSource);
   return {
     id: draft.manifest.id,
-    siteKey: buildSiteKey(firstMatch),
+    matches: draft.manifest.matches,
     scriptSource: draft.scriptSource,
     scriptSourceHash,
+    sourcePrUrl: draft.sourcePrUrl,
+    sourceCommitSha: draft.sourceCommitSha,
     enabled: false,
     createdAt: nowIso,
     updatedAt: nowIso,
@@ -53,7 +60,7 @@ export interface UserScriptRegistration {
 export function toUserScriptRegistration(customization: StoredCustomization): UserScriptRegistration {
   return {
     id: customization.id,
-    matches: [customization.siteKey.replace('site:', '')],
+    matches: customization.matches,
     js: customization.scriptSource,
   };
 }
