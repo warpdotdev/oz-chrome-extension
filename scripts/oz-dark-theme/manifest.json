@@ -1,0 +1,7 @@
+{
+  "id": "oz-dark-theme",
+  "version": "1.0.0",
+  "matches": ["https://oz.warp.dev/*"],
+  "entrypoint": "./script.user.js",
+  "description": "Applies a dark color scheme to oz.warp.dev pages, covering navigation, surfaces, text, inputs, status badges, scrollbars, and modals."
+}
