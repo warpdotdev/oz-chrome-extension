@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "Oz Chrome Extension",
+  "version": "0.1.0",
+  "description": "Generate and run per-site customization scripts via Oz cloud agents.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "userScripts"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "dist/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "Oz"
+  }
+}

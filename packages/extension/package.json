@@ -1,0 +1,15 @@
+{
+  "name": "@oz-chrome-extension/extension",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/background.js",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@oz-chrome-extension/oz-client": "0.1.0",
+    "@oz-chrome-extension/oz-runtime": "0.1.0",
+    "@oz-chrome-extension/shared": "0.1.0"
+  }
+}

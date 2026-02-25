@@ -1,0 +1,16 @@
+{
+  "name": "oz-chrome-extension",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Chrome extension that runs Oz-generated per-site customization scripts.",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "typecheck": "tsc -b packages/shared packages/oz-client packages/oz-runtime packages/extension",
+    "build": "npm run typecheck"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2"
+  }
+}
