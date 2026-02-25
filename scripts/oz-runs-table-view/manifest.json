@@ -1,0 +1,9 @@
+{
+  "id": "oz-runs-table-view",
+  "version": "1.0.0",
+  "matches": [
+    "https://oz.warp.dev/runs*"
+  ],
+  "entrypoint": "script.user.js",
+  "description": "Converts the main runs list on oz.warp.dev/runs from card/list layout to a compact table view with Status, Run ID, Message, and Time columns."
+}
