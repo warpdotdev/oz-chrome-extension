@@ -1,0 +1,9 @@
+{
+  "id": "oz-dark-theme",
+  "version": "1.0.0",
+  "matches": [
+    "*://*/*"
+  ],
+  "entrypoint": "./script.user.js",
+  "description": "Applies a dark colour scheme to any page by inverting colours with CSS filters, re-inverting images and media to preserve their original appearance."
+}
