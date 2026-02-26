@@ -1,0 +1,10 @@
+{
+  "id": "theatlantic-headline-themes",
+  "version": "1.0.0",
+  "matches": [
+    "https://www.theatlantic.com/",
+    "https://www.theatlantic.com"
+  ],
+  "entrypoint": "script.user.js",
+  "description": "Analyzes headlines on The Atlantic homepage, classifies them into broad themes (politics, economy, tech, climate, health, culture, international), and displays a non-destructive floating overlay with theme distribution, progress bars, example headlines, and top keywords."
+}
