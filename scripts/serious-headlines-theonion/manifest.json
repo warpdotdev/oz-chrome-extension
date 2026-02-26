@@ -1,0 +1,9 @@
+{
+  "id": "serious-headlines-theonion",
+  "version": "1.0.0",
+  "matches": [
+    "https://theonion.com/*"
+  ],
+  "entrypoint": "./script.user.js",
+  "description": "Rewrites satirical headlines on The Onion to read as straight, serious news headlines using deterministic text transforms."
+}
