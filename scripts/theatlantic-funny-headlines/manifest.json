@@ -1,0 +1,9 @@
+{
+  "id": "theatlantic-funny-headlines",
+  "version": "1.0.0",
+  "matches": [
+    "https://www.theatlantic.com/*"
+  ],
+  "entrypoint": "./script.user.js",
+  "description": "Makes headlines on The Atlantic funny by appending humorous editorial commentary chosen deterministically per headline."
+}
