@@ -1,0 +1,9 @@
+{
+  "id": "theatlantic-funny-headlines",
+  "version": "2.0.0",
+  "matches": [
+    "https://www.theatlantic.com/*"
+  ],
+  "entrypoint": "script.user.js",
+  "description": "Replaces headlines on The Atlantic homepage with humorous parody versions using deterministic text transformations. Idempotent and resilient to DOM drift."
+}
