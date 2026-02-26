@@ -1,0 +1,9 @@
+{
+  "id": "nyt-cooking-dark-mode",
+  "version": "1.0.0",
+  "matches": [
+    "https://cooking.nytimes.com/*"
+  ],
+  "entrypoint": "./script.user.js",
+  "description": "Applies a dark color scheme to NYT Cooking pages, including the recipe box, cards, navigation, and form elements."
+}
