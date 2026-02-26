@@ -1,0 +1,9 @@
+{
+  "id": "theatlantic-funny-headlines",
+  "version": "1.0.0",
+  "matches": [
+    "https://www.theatlantic.com/*"
+  ],
+  "entrypoint": "./script.user.js",
+  "description": "Makes headlines on The Atlantic funny using deterministic word substitutions and humorous suffixes. Transforms h2/h3/h4 article headlines with absurd replacements while remaining idempotent and safe on repeated runs."
+}
