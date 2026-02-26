@@ -1,0 +1,9 @@
+{
+  "id": "theatlantic-dark-theme",
+  "version": "1.0.0",
+  "matches": [
+    "*://www.theatlantic.com/*"
+  ],
+  "entrypoint": "./script.user.js",
+  "description": "Apply a dark color scheme to The Atlantic website, converting backgrounds and text to dark-mode equivalents while preserving images and media."
+}
