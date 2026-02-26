@@ -1,0 +1,7 @@
+{
+  "id": "mongodb-com-light-theme",
+  "version": "1",
+  "matches": ["https://www.mongodb.com/*"],
+  "entrypoint": "script.user.js",
+  "description": "Forces a light color scheme on www.mongodb.com by overriding dark backgrounds, text colors, navigation, cards, and code blocks with light-themed equivalents while preserving MongoDB brand accents."
+}
